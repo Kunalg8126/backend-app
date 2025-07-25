@@ -10,7 +10,7 @@ module.exports = function (req, res, next) {
   const token = authHeader.split(" ")[1]; 
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, `${import.meta.env.VITE_BACKEND_URL}`);
     req.userId = decoded.userId;
     next();
   } catch (err) {
