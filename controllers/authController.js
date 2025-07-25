@@ -140,7 +140,8 @@ exports.forgotPassword = async (req, res) => {
             },
         });
 
-        const resetLink =https://kitting.netlify.app/reset-password/${token}`;
+        const resetLink = `https://kitting.netlify.app/reset-password/${token}`;
+
 
         await transporter.sendMail({
             to: user.email,
