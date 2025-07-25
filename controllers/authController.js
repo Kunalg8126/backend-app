@@ -109,7 +109,8 @@ exports.login =  async (req, res) => {
 //  Profile route
 exports.profile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+      const userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
     if (!user) return res.status(404).json({ message: "User not found" });
     res.json(user);
   } catch (error) {
