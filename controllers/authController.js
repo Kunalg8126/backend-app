@@ -125,7 +125,13 @@ exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
 
     try {
-        const user = await User.findOne({ email });
+         if (!email) {
+            return res.status(400).json({ error: "Email is required" });
+        }
+        const normalizedEmail = email.toLowerCase().trim();
+        console.log("Forgot password request for:", normalizedEmail);
+        
+        const user = await User.findOne({ email: normalizedEmail });
         if (!user) return res.status(404).json({ error: "User not found" });
 
         const token = crypto.randomBytes(32).toString("hex");
